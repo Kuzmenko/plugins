@@ -1,3 +1,8 @@
+## 2.2.8
+
+* Get video size from AVAssetTrack.
+
+
 ## 2.2.7
 
 * Fixes a regression where dragging a [VideoProgressIndicator] while playing

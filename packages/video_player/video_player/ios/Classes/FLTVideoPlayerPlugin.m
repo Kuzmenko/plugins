@@ -350,6 +350,16 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
       return;
     }
 
+    AVPlayerItem *currentItem = self.player.currentItem;
+    NSArray<AVPlayerItemTrack *> *tracks = currentItem.tracks;
+    for (AVPlayerItemTrack *t in tracks){
+      AVAssetTrack *assetTrack = t.assetTrack;
+      if ([assetTrack.mediaType isEqual:AVMediaTypeVideo]) {
+        width = t.assetTrack.naturalSize.width;
+        height = t.assetTrack.naturalSize.height;
+      }
+    }
+      
     _isInitialized = true;
     _eventSink(@{
       @"event" : @"initialized",
