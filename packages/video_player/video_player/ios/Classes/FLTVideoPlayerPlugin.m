@@ -355,8 +355,16 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     for (AVPlayerItemTrack *t in tracks){
       AVAssetTrack *assetTrack = t.assetTrack;
       if ([assetTrack.mediaType isEqual:AVMediaTypeVideo]) {
-        width = t.assetTrack.naturalSize.width;
-        height = t.assetTrack.naturalSize.height;
+        NSInteger rotationDegrees = (NSInteger)round(radiansToDegrees(atan2(assetTrack.preferredTransform.b, assetTrack.preferredTransform.a)));
+        if (rotationDegrees == 90 || rotationDegrees == 270) {
+          height = t.assetTrack.naturalSize.width;
+          width = t.assetTrack.naturalSize.height;
+        }
+        else
+        {
+          width = t.assetTrack.naturalSize.width;
+          height = t.assetTrack.naturalSize.height;
+        }
       }
     }
       
